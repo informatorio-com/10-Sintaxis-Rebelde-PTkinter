@@ -55,6 +55,39 @@ def rotar_imagen_accion():
 
 #SR3
 
+#SR4 Funcion para acercar imagen
+def acercar_imagen_accion():
+    global current_pil_image, current_angle
+
+    if current_pil_image:
+        #Aumentamos el tamanio de la imagen en un 10%
+        ancho, alto = current_pil_image.size
+        nueva_imagen = current_pil_image.resize((int(ancho * 1.1), int(alto * 1,1)), Image.Resampling.LANCZOS)
+
+        imagen_acercada_tk = ImageTk.PhotoImage(nueva_imagen)
+        image_display_label.configure(image=imagen_acercada_tk)
+
+        #Actualizamos la imagen actual
+        current_pil_image = nueva_imagen
+    else:
+        print("Cargar Imagen primero")
+#SR4 Finaliza funcion para acercar imagen
+
+
+#SR6 Creamos funcion para acercar imagen
+def alejar_imagen_accion():
+    global current_pil_image, current_angle
+    if current_pil_image:
+        ancho, alto = current_pil_image.size
+        nueva_imagen = current_pil_image.resize((int(ancho * 0.9), int(alto * 0.9)), Image.Resampling.LANCZOS)
+        imagen_alejada_tk = ImageTk.PhotoImage(nueva_imagen)
+        image_display_label.configure(image=imagen_alejada_tk)
+        image_display_label.image = imagen_alejada_tk
+        current_pil_image = nueva_imagen
+    else:
+        print("Carga una imagen primero.")
+#SR6 Finaliza funcion para alejar imagen
+
 #SR1
 
 # Creamos la ventana principal
@@ -90,6 +123,24 @@ image_display_label.grid(row=1, column=0, sticky="nsew", pady=20)
 # Crear un Frame para contener los botones y colocarlos en la parte inferior
 button_frame = Tk.Frame(ventana, bg="black") 
 button_frame.grid(row=2, column=0, sticky="ew", pady=(10, 20)) 
+
+#SR4 Creamos boton para acercar la imagen
+boton_acercar = Tk.Button(
+    button_frame, text="Acercar",
+    borderwidth=2, relief=Tk.RAISED,
+    command=acercar_imagen_accion, fg="white", bg="black",
+    font=("Arial", 12), padx=10, pady=10)
+boton_acercar.pack(side=Tk.LEFT, padx=(5, 0))
+#SR4 Finaliza boton para acercar imagen
+
+#SR6 Creamos boton para alejar imagen
+boton_alejar = Tk.Button(
+    button_frame, text="Alejar",
+    borderwidth=2, relief=Tk.RAISED,
+    command=alejar_imagen_accion, fg="white", bg="black",
+    font=("Arial", 12), padx=10, pady=10)
+boton_alejar.pack(side=Tk.LEFT, padx=(5, 0))
+#SR6 Finalizamos boton para alejar imagen
 
 # Botón para subir imagen
 boton_importar = Tk.Button(
