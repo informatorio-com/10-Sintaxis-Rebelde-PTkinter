@@ -62,7 +62,7 @@ def acercar_imagen_accion():
     if current_pil_image:
         #Aumentamos el tamanio de la imagen en un 10%
         ancho, alto = current_pil_image.size
-        nueva_imagen = current_pil_image.resize((int(ancho * 1.1), int(alto * 1,1)), Image.Resampling.LANCZOS)
+        nueva_imagen = current_pil_image.resize((int(ancho * 1.1), int(alto * 1.1)), Image.Resampling.LANCZOS)
 
         imagen_acercada_tk = ImageTk.PhotoImage(nueva_imagen)
         image_display_label.configure(image=imagen_acercada_tk)
